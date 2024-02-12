@@ -1,0 +1,168 @@
+<!DOCTYPE html> <html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desserts</title>
+<link rel="stylesheet" href="styles.css">
+<style>body {
+  background-image: url('https://i.pinimg.com/736x/1b/3b/9d/1b3b9d005cd36861fafc12399110ca1f.jpg'); 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif; 
+  background-color: #f3f3f3; 
+  margin: 0; 
+  padding: 20px; 
+}
+
+h1 {
+  text-align: center; 
+  color: #333; 
+}
+
+#gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  margin-top: 20px; 
+}
+
+.image-container {
+  margin: 10px; 
+  height: auto;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-sizing: border-box; 
+  text-align: center;
+  background-color: #fff; 
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 150px;
+}
+
+#errorMessage {
+  color: red;
+  display: none;
+}
+
+input[type="text"] {
+  width: 60%;
+  padding: 10px; 
+  font-size: 16px; 
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px; 
+  background-color: #fab4cb;
+  color: #fff; 
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #dd2889; 
+}
+
+.box{
+    background-color: #fff;
+    opacity: 0.9;
+    border: 5px;
+    border-radius: 15px;
+    padding:15px;
+    margin:35px;
+}
+
+.input{
+    text-align:center;
+}
+
+</style></head>
+<body>
+<div class="box">
+<h1>Delicious Desserts</h1>
+<div class="input">
+  <label for="imageUrl">Image URL:</label>
+  <input type="text" id="imageUrl">
+    <br><br>
+  <label for="caption">Caption:</label>
+  <input type="text" id="caption">
+    <br><br>
+  <button id="addButton">Add</button>
+  <button id="removeButton">Remove Last Image</button>
+  <p id="errorMessage" class="error-message">Please enter a valid image URL</p>
+</div>
+<div id="gallery" class="gallery">
+  <!-- Initial Images -->
+  <div class="image-container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJnjbEF3NX9vK5oOiYk4-6qPbRTaz7IqDRZQ&amp;s">
+    <p>Cake</p>
+  </div>
+  <div class="image-container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpjWssJNCU-a0ezrn-6lGGeFwjrrZSenToNw&amp;s">
+    <p>Brownies</p>
+  </div>
+  <div class="image-container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbAqAkMlLSPv_-8k9khf8N7KibHGJZNwEptA&amp;s">
+    <p>Cookies</p>
+  </div>
+</div>
+</div>
+<script src="scripts.js"></script>
+
+
+<script>
+/*__POPCODESTART__*/
+document.getElementById("addButton").addEventListener("click", addImage);
+document.getElementById("removeButton").addEventListener("click", removeLastImage);
+
+function addImage() {
+  var inputField = document.getElementById("imageUrl");
+  var captionField = document.getElementById("caption");
+  var imageUrl = inputField.value.trim();
+  var caption = captionField.value.trim();
+  var errorMessage = document.getElementById("errorMessage");
+  var galleryContainer = document.getElementById("gallery");
+
+  if (!imageUrl) {
+    errorMessage.style.display = "block";
+    return;
+  }
+
+  errorMessage.style.display = "none";
+  var imageContainer = document.createElement("div");
+  imageContainer.classList.add("image-container");
+  var image = document.createElement("img");
+  image.src = imageUrl;
+  imageContainer.appendChild(image);
+
+  if (caption) {
+    var captionElement = document.createElement("p");
+    captionElement.textContent = caption;
+    imageContainer.appendChild(captionElement);
+  }
+
+  galleryContainer.appendChild(imageContainer);
+  inputField.value = "";
+  captionField.value = "";
+}
+
+function removeLastImage() {
+  var galleryContainer = document.getElementById("gallery");
+  var images = galleryContainer.querySelectorAll(".image-container");
+
+  if (images.length > 3) {
+    galleryContainer.removeChild(images[images.length - 1]);
+  }
+}
+
+function addCaption() {
+  var galleryContainer = document.getElementById("gallery");
+  var images = galleryContainer.querySelectorAll(".image-container");
+  images.forEach(function (imageContainer) {
+    var caption = document.createElement("p");
+    caption.textContent = "Your caption here";
+    imageContainer.appendChild(caption);
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvcGNvZGVQcmV2aWV3LmpzIl0sIm5hbWVzIjpbImRvY3VtZW50IiwiZ2V0RWxlbWVudEJ5SWQiLCJhZGRFdmVudExpc3RlbmVyIiwiYWRkSW1hZ2UiLCJyZW1vdmVMYXN0SW1hZ2UiLCJpbnB1dEZpZWxkIiwiY2FwdGlvbkZpZWxkIiwiaW1hZ2VVcmwiLCJ2YWx1ZSIsInRyaW0iLCJjYXB0aW9uIiwiZXJyb3JNZXNzYWdlIiwiZ2FsbGVyeUNvbnRhaW5lciIsInN0eWxlIiwiZGlzcGxheSIsImltYWdlQ29udGFpbmVyIiwiY3JlYXRlRWxlbWVudCIsImNsYXNzTGlzdCIsImFkZCIsImltYWdlIiwic3JjIiwiYXBwZW5kQ2hpbGQiLCJjYXB0aW9uRWxlbWVudCIsInRleHRDb250ZW50IiwiaW1hZ2VzIiwicXVlcnlTZWxlY3RvckFsbCIsImxlbmd0aCIsInJlbW92ZUNoaWxkIiwiYWRkQ2FwdGlvbiIsImZvckVhY2giXSwibWFwcGluZ3MiOiJBQUFBQSxRQUFRLENBQUNDLGNBQVQsQ0FBd0IsV0FBeEIsRUFBcUNDLGdCQUFyQyxDQUFzRCxPQUF0RCxFQUErREMsUUFBL0Q7QUFDQUgsUUFBUSxDQUFDQyxjQUFULENBQXdCLGNBQXhCLEVBQXdDQyxnQkFBeEMsQ0FBeUQsT0FBekQsRUFBa0VFLGVBQWxFOztBQUNBLFNBQVNELFFBQVQsR0FBb0I7QUFDbEIsTUFBTUUsVUFBVSxHQUFHTCxRQUFRLENBQUNDLGNBQVQsQ0FBd0IsVUFBeEIsQ0FBbkI7QUFDQSxNQUFNSyxZQUFZLEdBQUdOLFFBQVEsQ0FBQ0MsY0FBVCxDQUF3QixTQUF4QixDQUFyQjtBQUNBLE1BQU1NLFFBQVEsR0FBR0YsVUFBVSxDQUFDRyxLQUFYLENBQWlCQyxJQUFqQixFQUFqQjtBQUNBLE1BQU1DLE9BQU8sR0FBR0osWUFBWSxDQUFDRSxLQUFiLENBQW1CQyxJQUFuQixFQUFoQjtBQUNBLE1BQU1FLFlBQVksR0FBR1gsUUFBUSxDQUFDQyxjQUFULENBQXdCLGNBQXhCLENBQXJCO0FBQ0EsTUFBTVcsZ0JBQWdCLEdBQUdaLFFBQVEsQ0FBQ0MsY0FBVCxDQUF3QixTQUF4QixDQUF6Qjs7QUFFQSxNQUFJLENBQUNNLFFBQUwsRUFBZTtBQUNiSSxJQUFBQSxZQUFZLENBQUNFLEtBQWIsQ0FBbUJDLE9BQW5CLEdBQTZCLE9BQTdCO0FBQ0E7QUFDRDs7QUFFREgsRUFBQUEsWUFBWSxDQUFDRSxLQUFiLENBQW1CQyxPQUFuQixHQUE2QixNQUE3QjtBQUVBLE1BQU1DLGNBQWMsR0FBR2YsUUFBUSxDQUFDZ0IsYUFBVCxDQUF1QixLQUF2QixDQUF2QjtBQUNBRCxFQUFBQSxjQUFjLENBQUNFLFNBQWYsQ0FBeUJDLEdBQXpCLENBQTZCLGlCQUE3QjtBQUVBLE1BQU1DLEtBQUssR0FBR25CLFFBQVEsQ0FBQ2dCLGFBQVQsQ0FBdUIsS0FBdkIsQ0FBZDtBQUNBRyxFQUFBQSxLQUFLLENBQUNDLEdBQU4sR0FBWWIsUUFBWjtBQUVBUSxFQUFBQSxjQUFjLENBQUNNLFdBQWYsQ0FBMkJGLEtBQTNCOztBQUVBLE1BQUlULE9BQUosRUFBYTtBQUNYLFFBQU1ZLGNBQWMsR0FBR3RCLFFBQVEsQ0FBQ2dCLGFBQVQsQ0FBdUIsR0FBdkIsQ0FBdkI7QUFDQU0sSUFBQUEsY0FBYyxDQUFDQyxXQUFmLEdBQTZCYixPQUE3QjtBQUNBSyxJQUFBQSxjQUFjLENBQUNNLFdBQWYsQ0FBMkJDLGNBQTNCO0FBQ0Q7O0FBRURWLEVBQUFBLGdCQUFnQixDQUFDUyxXQUFqQixDQUE2Qk4sY0FBN0I7QUFFQVYsRUFBQUEsVUFBVSxDQUFDRyxLQUFYLEdBQW1CLEVBQW5CO0FBQ0FGLEVBQUFBLFlBQVksQ0FBQ0UsS0FBYixHQUFxQixFQUFyQjtBQUNEOztBQUVELFNBQVNKLGVBQVQsR0FBMkI7QUFDekIsTUFBTVEsZ0JBQWdCLEdBQUdaLFFBQVEsQ0FBQ0MsY0FBVCxDQUF3QixTQUF4QixDQUF6QjtBQUNBLE1BQU11QixNQUFNLEdBQUdaLGdCQUFnQixDQUFDYSxnQkFBakIsQ0FBa0Msa0JBQWxDLENBQWY7O0FBRUEsTUFBSUQsTUFBTSxDQUFDRSxNQUFQLEdBQWdCLENBQXBCLEVBQXVCO0FBQ3JCZCxJQUFBQSxnQkFBZ0IsQ0FBQ2UsV0FBakIsQ0FBNkJILE1BQU0sQ0FBQ0EsTUFBTSxDQUFDRSxNQUFQLEdBQWdCLENBQWpCLENBQW5DO0FBQ0Q7QUFDRjs7QUFFRCxTQUFTRSxVQUFULEdBQXNCO0FBQ3BCLE1BQU1oQixnQkFBZ0IsR0FBR1osUUFBUSxDQUFDQyxjQUFULENBQXdCLFNBQXhCLENBQXpCO0FBQ0EsTUFBTXVCLE1BQU0sR0FBR1osZ0JBQWdCLENBQUNhLGdCQUFqQixDQUFrQyxrQkFBbEMsQ0FBZjtBQUVBRCxFQUFBQSxNQUFNLENBQUNLLE9BQVAsQ0FBZSxVQUFBZCxjQUFjLEVBQUk7QUFDL0IsUUFBTUwsT0FBTyxHQUFHVixRQUFRLENBQUNnQixhQUFULENBQXVCLEdBQXZCLENBQWhCO0FBQ0FOLElBQUFBLE9BQU8sQ0FBQ2EsV0FBUixHQUFzQixtQkFBdEI7QUFDQVIsSUFBQUEsY0FBYyxDQUFDTSxXQUFmLENBQTJCWCxPQUEzQjtBQUNELEdBSkQ7QUFLRCIsInNvdXJjZXNDb250ZW50IjpbImRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiYWRkQnV0dG9uXCIpLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBhZGRJbWFnZSk7XG5kb2N1bWVudC5nZXRFbGVtZW50QnlJZChcInJlbW92ZUJ1dHRvblwiKS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgcmVtb3ZlTGFzdEltYWdlKTtcbmZ1bmN0aW9uIGFkZEltYWdlKCkge1xuICBjb25zdCBpbnB1dEZpZWxkID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJpbWFnZVVybFwiKTtcbiAgY29uc3QgY2FwdGlvbkZpZWxkID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjYXB0aW9uXCIpOyBcbiAgY29uc3QgaW1hZ2VVcmwgPSBpbnB1dEZpZWxkLnZhbHVlLnRyaW0oKTtcbiAgY29uc3QgY2FwdGlvbiA9IGNhcHRpb25GaWVsZC52YWx1ZS50cmltKCk7IFxuICBjb25zdCBlcnJvck1lc3NhZ2UgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImVycm9yTWVzc2FnZVwiKTtcbiAgY29uc3QgZ2FsbGVyeUNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZ2FsbGVyeVwiKTtcblxuICBpZiAoIWltYWdlVXJsKSB7XG4gICAgZXJyb3JNZXNzYWdlLnN0eWxlLmRpc3BsYXkgPSBcImJsb2NrXCI7XG4gICAgcmV0dXJuO1xuICB9XG5cbiAgZXJyb3JNZXNzYWdlLnN0eWxlLmRpc3BsYXkgPSBcIm5vbmVcIjtcblxuICBjb25zdCBpbWFnZUNvbnRhaW5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG4gIGltYWdlQ29udGFpbmVyLmNsYXNzTGlzdC5hZGQoXCJpbWFnZS1jb250YWluZXJcIik7XG5cbiAgY29uc3QgaW1hZ2UgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiaW1nXCIpO1xuICBpbWFnZS5zcmMgPSBpbWFnZVVybDtcblxuICBpbWFnZUNvbnRhaW5lci5hcHBlbmRDaGlsZChpbWFnZSk7XG4gIFxuICBpZiAoY2FwdGlvbikgeyBcbiAgICBjb25zdCBjYXB0aW9uRWxlbWVudCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJwXCIpO1xuICAgIGNhcHRpb25FbGVtZW50LnRleHRDb250ZW50ID0gY2FwdGlvbjtcbiAgICBpbWFnZUNvbnRhaW5lci5hcHBlbmRDaGlsZChjYXB0aW9uRWxlbWVudCk7XG4gIH1cblxuICBnYWxsZXJ5Q29udGFpbmVyLmFwcGVuZENoaWxkKGltYWdlQ29udGFpbmVyKTtcblxuICBpbnB1dEZpZWxkLnZhbHVlID0gXCJcIjsgXG4gIGNhcHRpb25GaWVsZC52YWx1ZSA9IFwiXCI7IFxufVxuXG5mdW5jdGlvbiByZW1vdmVMYXN0SW1hZ2UoKSB7XG4gIGNvbnN0IGdhbGxlcnlDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImdhbGxlcnlcIik7XG4gIGNvbnN0IGltYWdlcyA9IGdhbGxlcnlDb250YWluZXIucXVlcnlTZWxlY3RvckFsbChcIi5pbWFnZS1jb250YWluZXJcIik7XG4gIFxuICBpZiAoaW1hZ2VzLmxlbmd0aCA+IDMpIHtcbiAgICBnYWxsZXJ5Q29udGFpbmVyLnJlbW92ZUNoaWxkKGltYWdlc1tpbWFnZXMubGVuZ3RoIC0gMV0pO1xuICB9XG59XG5cbmZ1bmN0aW9uIGFkZENhcHRpb24oKSB7XG4gIGNvbnN0IGdhbGxlcnlDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImdhbGxlcnlcIik7XG4gIGNvbnN0IGltYWdlcyA9IGdhbGxlcnlDb250YWluZXIucXVlcnlTZWxlY3RvckFsbChcIi5pbWFnZS1jb250YWluZXJcIik7XG5cbiAgaW1hZ2VzLmZvckVhY2goaW1hZ2VDb250YWluZXIgPT4ge1xuICAgIGNvbnN0IGNhcHRpb24gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicFwiKTtcbiAgICBjYXB0aW9uLnRleHRDb250ZW50ID0gXCJZb3VyIGNhcHRpb24gaGVyZVwiO1xuICAgIGltYWdlQ29udGFpbmVyLmFwcGVuZENoaWxkKGNhcHRpb24pO1xuICB9KTtcbn1cbiJdfQ==</script></body></html>
