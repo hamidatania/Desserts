@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desserts</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class= "box">
+<h1>Delicious Desserts</h1>
+<div class="input">
+  <label for="imageUrl">Image URL:</label>
+  <input type="text" id="imageUrl">
+    <br><br>
+  <label for="caption">Caption:</label>
+  <input type="text" id="caption">
+    <br><br>
+  <button id="addButton">Add</button>
+  <button id="removeButton">Remove Last Image</button>
+  <p id="errorMessage" class="error-message">Please enter a valid image URL</p>
+</div>
+<div id="gallery" class="gallery">
+  <!-- Initial Images -->
+  <div class="image-container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJnjbEF3NX9vK5oOiYk4-6qPbRTaz7IqDRZQ&s">
+    <p>Cake</p>
+  </div>
+  <div class="image-container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpjWssJNCU-a0ezrn-6lGGeFwjrrZSenToNw&s">
+    <p>Brownies</p>
+  </div>
+  <div class="image-container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbAqAkMlLSPv_-8k9khf8N7KibHGJZNwEptA&s">
+    <p>Cookies</p>
+  </div>
+</div>
+</div>
+<script src="scripts.js"></script>
+</body>
+</html>
